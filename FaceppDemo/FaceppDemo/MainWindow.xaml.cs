@@ -27,7 +27,10 @@ namespace FaceppDemo
         {
             InitializeComponent();
         }
-
+        private double max(double x, double y)
+        {
+            return (x > y) ? x : y;
+        }
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -58,18 +61,21 @@ namespace FaceppDemo
                 pngE.Save(stream);
             }
             DetectResult res = fs.Detection_DetectImg(System.Environment.CurrentDirectory + "temp.jpg");
-            RectangleGeometry rect = new RectangleGeometry();
-            rect.Rect = new Rect(res.face[0].center.x * image1.Width / 100.0 - res.face[0].width * image1.Width / 200.0,
-                                 res.face[0].center.y * image1.Height / 100.0 - res.face[0].height * image1.Height / 200.0,
-                                 res.face[0].width * image1.Width / 100.0, res.face[0].height * image1.Height / 100.0);
-            System.Windows.Shapes.Path myPath = new System.Windows.Shapes.Path();
-            myPath.Stroke = Brushes.Red;
-            myPath.StrokeThickness = 3;
-            myPath.Data = rect;
-            label1.Content = label1.Content + String.Format("({0:F2},{1:F2})", res.face[0].center.x, res.face[0].center.y);
-            label2.Content = label2.Content + String.Format("({0:F2},{1:F2})", res.face[0].width, res.face[0].height);
             canvas1.Children.Clear();
-            canvas1.Children.Add(myPath);
+            for (int i = 0; i < res.face.Count; ++i)
+            {
+                RectangleGeometry rect = new RectangleGeometry();
+                rect.Rect = new Rect(max(res.face[i].center.x * image1.Width / 100.0 - res.face[i].width * image1.Width / 200.0, 0),
+                                     max(res.face[i].center.y * image1.Height / 100.0 - res.face[i].height * image1.Height / 200.0, 0),
+                                     res.face[i].width * image1.Width / 100.0, res.face[i].height * image1.Height / 100.0);
+                System.Windows.Shapes.Path myPath = new System.Windows.Shapes.Path();
+                myPath.Stroke = Brushes.Red;
+                myPath.StrokeThickness = 3;
+                myPath.Data = rect;
+                label1.Content = label1.Content + String.Format("({0:F2},{1:F2})", res.face[0].center.x, res.face[0].center.y);
+                label2.Content = label2.Content + String.Format("({0:F2},{1:F2})", res.face[0].width, res.face[0].height);
+                canvas1.Children.Add(myPath);
+            }
         }
     }
 }
