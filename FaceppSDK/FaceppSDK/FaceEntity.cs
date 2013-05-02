@@ -51,24 +51,19 @@ namespace FaceppSDK
     /// </summary>
     public class Face
     {
-        public Point eye_left { get; set; }
-        public Point center { get; set; }
-        public double width { get; set; }
         public Attribute attribute { get; set; }
-        public Point mouth_left { get; set; }
-        public double height { get; set; }
-        public Point mouth_right { get; set; }
         public string face_id { get; set; }
-        public Point eye_right { get; set; }
+        public Position position { get; set; }
+        public string tag { get; set; }
     }
     public class DetectResult
     {
-        public string url{ get; set; }
-        public string img_id{ get; set; }
-        public int img_width { get; set; }
-        public string session_id { get; set; }
         public IList<Face> face { get; set; }
         public int img_height { get; set; }
+        public string img_id { get; set; }
+        public int img_width { get; set; }
+        public string session_id { get; set; }
+        public string url{ get; set; }
     }
     public class Component_Similarity
     {
@@ -83,6 +78,10 @@ namespace FaceppSDK
         public string session_id { get; set; }
         public double similarity { get; set; }
     }
+    public class AsyncResult
+    {
+        public string session_id { get; set; }
+    }
     public class TrainResult
     {
         public string session_id { get; set; }
@@ -95,9 +94,10 @@ namespace FaceppSDK
     }
     public class CandidateItemOfRecognize
     {
-        public string person_id { get; set; }
         public double confidence { get; set; }
+        public string person_id { get; set; }
         public string person_name { get; set; }
+        public string tag { get; set; }
     }
     public class FaceItemOfRecognize
     {
@@ -105,9 +105,8 @@ namespace FaceppSDK
         public string face_id { get; set; }
         public IList<CandidateItemOfRecognize> candidate { get; set; }
     }
-    public class RecognizeResult
+    public class IdentifyResult
     {
-        public bool has_untrained_person { get; set; }
         public string session_id { get; set; }
         public IList<FaceItemOfRecognize> face { get; set; }
     }
@@ -115,39 +114,56 @@ namespace FaceppSDK
     {
         public string face_id { get; set; }
         public string similarity { get; set; }
+        public string tag { get; set; }
     }
     public class SearchResult
     {
-        public bool has_untrained_face { get; set; }
-        public string session_id { get; set; }
         public IList<CandidateItemOfSearch> candidate { get; set; }
+        public string session_id { get; set; }
     }
     public class ManageResult
     {
+        public int added { get; set; }
         public bool success { get; set; }
     }
     public class PersonBasicInfo
     {
+        public int added_face { get; set; }
+        public int added_group { get; set; }
         public string person_id { get; set; }
-        public string tag { get; set; }
         public string person_name { get; set; }
+        public string tag { get; set; }
+    }
+    public class PersonBasicInfoNoNum
+    {
+        public string person_id { get; set; }
+        public string person_name { get; set; }
+        public string tag { get; set; }
     }
     public class GroupBasicInfo
     {
+        public int added_person { get; set; }
         public string group_id { get;set; }
-        public string tag { get; set; }
         public string group_name { get; set; }
+        public string tag { get; set; }
+    }
+    public class GroupBasicInfoNoNum
+    {
+        public string group_id { get; set; }
+        public string group_name { get; set; }
+        public string tag { get; set; }
     }
     public class PersonInfo
     {
         public string person_id { get; set; }
         public string person_name { get; set; }
         public IList<string> face_id { get; set; }
-        public IList<GroupBasicInfo> group { get; set; }
+        public string tag { get; set; }
+        public IList<GroupBasicInfoNoNum> group { get; set; }
     }
     public class GroupInfo
     {
-        public IList<PersonBasicInfo> person { get; set; }
+        public IList<PersonBasicInfoNoNum> person { get; set; }
         public string group_id { get; set; }
         public string tag { get; set; }
         public string group_name { get; set; }
@@ -166,6 +182,7 @@ namespace FaceppSDK
         public double height { get; set; }
         public Point mouth_right { get; set; }
         public Point eye_right { get; set; }
+        public Point nose { get; set; }
     }
     public class FaceInfoItem
     {
@@ -221,7 +238,7 @@ namespace FaceppSDK
     public class RecognizeSessionInfo
     {
         public string status { get; set; }
-        public RecognizeResult result { get; set; }
+        public IdentifyResult result { get; set; }
         public string session_id { get; set; }
     }
     public class SearchSessionInfo
@@ -241,5 +258,62 @@ namespace FaceppSDK
         public string status { get; set; }
         public VerifyResult result { get; set; }
         public string session_id { get; set; }
+    }
+    public class FaceSetCreateResult
+    {
+        public string added_face { get; set; }
+        public string faceset_id { get; set; }
+        public string faceset_name { get; set; }
+        public string tag { get; set; }
+    }
+    public class FaceSetDeleteResult
+    {
+        public int deleted { get; set; }
+        public bool success { get; set; }
+    }
+    public class FaceSetAddResult
+    {
+        public int added { get; set; }
+        public bool success { get; set; }
+    }
+    public class FaceSetRemoveResult
+    {
+        public int removed { get; set; }
+        public bool success { get; set; }
+    }
+    public class FaceSetSetInfoResult
+    {
+        public string faceset_id { get; set; }
+        public string faceset_name { get; set; }
+        public string tag { get; set; }
+    }
+    public class FaceBasicInfo
+    {
+        public string face_id { get; set; }
+        public string tag { get; set; }
+    }
+    public class FaceSetInfoResult
+    {
+        public IList<FaceBasicInfo> face { get; set; }
+        public string faceset_id { get; set; }
+        public string faceset_name { get; set; }
+        public string tag { get; set; }
+    }
+    public class FaceSetListInfo
+    {
+        public IList<FaceBasicInfo> faceset { get; set; }
+    }
+    public class FaceGroupResultItem
+    {
+        public FaceBasicInfo[][] group { get; set; }
+        public FaceBasicInfo[] ungrouped { get; set; }
+    }
+    public class GroupingResult
+    {
+        public int create_time { get; set; }
+        public int finish_time { get; set; }
+        public FaceGroupResultItem result { get; set; }
+        public string session_id { get; set; }
+        public string status { get; set; }
     }
 }

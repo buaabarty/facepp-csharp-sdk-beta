@@ -27,9 +27,8 @@ namespace FaceppSDK
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             request.Accept = "*/*";
-            request.Timeout = 15000;
+            request.Timeout = 150000;
             request.AllowAutoRedirect = false;
-
             StreamWriter requestStream = null;
             WebResponse response = null;
             string responseStr = null;
@@ -75,7 +74,7 @@ namespace FaceppSDK
             request.Method = "GET";
             //request.ContentType = "application/x-www-form-urlencoded";
             request.Accept = "*/*";
-            request.Timeout = 15000;
+            request.Timeout = 150000;
             request.AllowAutoRedirect = false;
 
             WebResponse response = null;
