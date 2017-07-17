@@ -1,4 +1,4 @@
-##您只需要做以下几个步骤就可以将FacePlusPlus SDK集成到您的C#工程中
+## 您只需要做以下几个步骤就可以将FacePlusPlus SDK集成到您的C#工程中
 
 1. 新建一个C#的项目(asp/form/wpf/...)
 
