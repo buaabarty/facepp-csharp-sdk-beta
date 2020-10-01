@@ -8,7 +8,7 @@
 
 4. 添加faceppSDK命名空间
 
-5. 使用你的appkey和appsecret初始化一个FaceService
+5. 使用你的appkey和appsecret初始化一个FaceappService
 
 6. 开始尽情的使用各种功能吧！
 
