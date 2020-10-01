@@ -4,7 +4,7 @@
 
 2. 设置项目的目标框架为.NET Framework 4(对于.NET 4 Client Profile可能无法使用)
 
-3. 把根目录中的log4net.dll和FaceppSDK.dll添加到引用中
+3. 把根目录中的log4net.dll和FaceappSDK.dll添加到引用中
 
 4. 添加faceppSDK命名空间
 
