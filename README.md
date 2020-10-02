@@ -2,7 +2,7 @@
 
 1. 新建一个C#的项目(asp/form/wpf/...)
 
-2. 设置项目的目标框架为.NET Framework 4(对于.NET 4 Client Profile可能无法使用)
+2. 设置项目的目标框架为.NET FrameWork 4(对于.NET 4 Client Profile可能无法使用)
 
 3. 把根目录中的log4net.dll和FaceppSDK.dll添加到引用中
 
